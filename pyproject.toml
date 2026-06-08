@@ -1,0 +1,54 @@
+[project]
+name = "sporty-tasks"
+version = "0.1.0"
+description = "Configuration conflict resolver and operational task executor"
+requires-python = ">=3.12"
+dependencies = [
+    "cryptography>=48.0.0",
+    "pyyaml>=6.0.3",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+sporty-config = "question1.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "ruff>=0.15.16",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["question1", "question2"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = [".venv", "build", "dist", "__pycache__"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes (undefined names, unused imports)
+    "I",    # isort (import ordering)
+    "B",    # bugbear (common bugs)
+    "UP",   # pyupgrade (modernize syntax)
+    "N",    # pep8-naming
+    "SIM",  # simplify
+    "ERA",  # commented-out code
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "E501",   # line too long — formatter handles
+    "N818"
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true

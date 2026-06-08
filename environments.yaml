@@ -1,0 +1,48 @@
+environments:
+
+  staging:
+    priority: 0
+    sources:
+      - type: yaml
+        path: question1/examples/staging.yaml
+        required: true
+
+      - type: env
+        prefix: SPORTY_
+        separator: __
+
+      - type: vault
+        path: question1/examples/secrets.staging.enc
+        key_env: VAULT_KEY
+        required: false
+
+  production:
+    priority: 100
+    sources:
+      - type: yaml
+        path: question1/examples/production.yaml
+        required: true
+
+      - type: env
+        prefix: SPORTY_
+        separator: __
+
+      - type: vault
+        path: question1/examples/secrets.production.enc
+        key_env: VAULT_KEY
+        required: false
+
+policy:
+  expected_divergence_between_envs:
+    - database.host
+    - log_level
+    - feature_flags.*
+  fail_on_required_source_missing: true
+  connection_strings:                                                                                                                                                                       
+    database: "postgresql://{username}:{password}@{host}:{port}/{name}"
+    rabbitmq: "amqp://{username}:{password}@{host}:{port}/{virtual_host}"                                                                                                                   
+    redis:    "redis://{username}:{password}@{host}:{port}/0"
+  vault_key_mapping:                                      
+    database_password: database.password
+    rabbitmq_password: rabbitmq.password
+    redis_password: redis.password
