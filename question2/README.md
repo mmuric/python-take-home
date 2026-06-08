@@ -1,5 +1,7 @@
-⚠️ SECURITY: executes arbitrary commands as the calling user.
-Review TaskConfig before running — target='rm', args=['-rf', '/'] WILL execute destructively. No shell parsing, but named command runs directly. Production: add binary allowlist via validate().
+> ⚠️ SECURITY: executes arbitrary commands as the calling user.
+> Review TaskConfig before running — target='rm', args=['-rf', '/'] WILL execute destructively.
+> No shell parsing, but named command runs directly.
+> Production: add binary allowlist via validate().
 
 # Question 2 — Extend the Task Executor
 
@@ -9,8 +11,8 @@ Review TaskConfig before running — target='rm', args=['-rf', '/'] WILL execute
 /
 ├── question2/
     ├── __main__.py           # entry point — composes tasks and runs QueueExecutor
-    ├── executor.py           # baseline framework (Task, TaskResult, Executor, HealthCheckTask, CleanupTask)
-    ├── queue_executor.py     # QueueExecutor (retry + timeout via Queue + ThreadPoolExecutor) + DataSyncTask
+    ├── executor.py           # baseline framework
+    ├── queue_executor.py     # QueueExecutor (retry + timeout via Queue + ThreadPoolExecutor) + SubprocessTask
     └── tests/                # pytest tests for retry, timeout, mixed batches
 ```
 
