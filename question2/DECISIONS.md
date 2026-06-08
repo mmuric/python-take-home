@@ -1,3 +1,6 @@
+⚠️ SECURITY: executes arbitrary commands as the calling user.
+Review TaskConfig before running — target='rm', args=['-rf', '/'] WILL execute destructively. No shell parsing, but named command runs directly. Production: add binary allowlist via validate().
+
 # Question 2 — Decisions
 
 ## 1. What retry strategy did you implement and why? What alternatives did you consider?
